@@ -1,6 +1,15 @@
-// This file is required by the index.html file and will
-// be executed in the renderer process for that window.
-// No Node.js APIs are available in this process because
-// `nodeIntegration` is turned off. Use `preload.js` to
-// selectively enable features needed in the rendering
-// process.
+let child = require('child_process').execFile
+let executablePath = "helloworld.exe"
+
+const buttonClicked = () => {
+	child(executablePath, function(err, data) {
+		if(err){
+		  alert(err)
+		  return
+		}
+
+		document.getElementById("block-for-text").innerHTML = data.toString()
+	})
+}
+
+document.getElementById("button-to-click").addEventListener("click", buttonClicked);
